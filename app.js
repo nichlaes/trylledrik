@@ -141,7 +141,7 @@ function render() {
   const active = state.batches.filter((b) => b.stage !== 'done');
   $('#batch-list').innerHTML = active.length
     ? active.map(batchCard).join('')
-    : '<p class="empty">No brews going. Start one! \u{1FAD9}</p>';
+    : '<p class="empty"><img src="./icon.svg" alt="" class="empty-art">No brews going. Start one!</p>';
 
   const done = state.batches
     .filter((b) => b.stage === 'done')

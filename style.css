@@ -1,20 +1,20 @@
 :root {
-  --bg: #150e26;
-  --bg-glow: #241347;
-  --card: #211539;
-  --line: #382a5c;
-  --ink: #ede7ff;
-  --muted: #a396cf;
-  --accent: #a78bfa;
-  --accent-deep: #7c3aed;
-  --green: #34d399;
-  --danger: #fb7185;
-  --gold: #fbbf24;
+  --bg: #f3e7cd;
+  --bg-glow: #fbf4e2;
+  --card: #fffcf3;
+  --line: #e6d5ad;
+  --ink: #4a3512;
+  --muted: #97805a;
+  --accent: #e2a13a;
+  --accent-deep: #b3761a;
+  --green: #3e7d3a;
+  --danger: #c2452f;
+  --gold: #dd9b1f;
   --radius: 14px;
 }
 
 * { box-sizing: border-box; }
-html { color-scheme: dark; }
+html { color-scheme: light; }
 
 body {
   margin: 0;
@@ -30,6 +30,7 @@ header {
   text-align: center;
 }
 h1 { margin: 0 0 10px; font-size: 1.5rem; letter-spacing: 0.02em; }
+.logo { height: 1.7em; vertical-align: -0.5em; margin-right: 2px; }
 
 nav { display: flex; gap: 6px; justify-content: center; }
 .tab {
@@ -40,7 +41,11 @@ nav { display: flex; gap: 6px; justify-content: center; }
   padding: 8px 14px;
   border-radius: 999px;
 }
-.tab.active { background: var(--card); color: var(--ink); }
+.tab.active {
+  background: var(--card);
+  color: var(--ink);
+  box-shadow: 0 1px 3px rgba(74, 53, 18, 0.15);
+}
 
 main { max-width: 520px; margin: 0 auto; padding: 16px; }
 section > h2 { font-size: 1rem; color: var(--muted); margin: 28px 0 10px; }
@@ -51,6 +56,7 @@ section > h2 { font-size: 1rem; color: var(--muted); margin: 28px 0 10px; }
   border-radius: var(--radius);
   padding: 14px 16px;
   margin-bottom: 12px;
+  box-shadow: 0 1px 4px rgba(74, 53, 18, 0.08);
 }
 .card header {
   display: flex;
@@ -68,8 +74,8 @@ section > h2 { font-size: 1rem; color: var(--muted); margin: 28px 0 10px; }
   border-radius: 999px;
   white-space: nowrap;
 }
-.badge.f1 { background: #3b2a6e; color: var(--accent); }
-.badge.f2 { background: #123f31; color: var(--green); }
+.badge.f1 { background: #f7e3b7; color: #9c6c0d; }
+.badge.f2 { background: #ddecd8; color: var(--green); }
 
 .flavorings { color: var(--green); margin: 6px 0 0; font-size: 0.95rem; }
 .day { margin: 10px 0 6px; color: var(--muted); font-size: 0.9rem; }
@@ -77,13 +83,13 @@ section > h2 { font-size: 1rem; color: var(--muted); margin: 28px 0 10px; }
 .progress {
   height: 8px;
   border-radius: 999px;
-  background: #120b22;
+  background: #ecdfbe;
   overflow: hidden;
 }
 .progress div {
   height: 100%;
   border-radius: 999px;
-  background: linear-gradient(90deg, var(--accent-deep), var(--green));
+  background: linear-gradient(90deg, var(--accent), var(--green));
 }
 
 .card.overdue { border-color: var(--danger); }
@@ -101,16 +107,17 @@ menu {
 
 button { font: inherit; color: var(--ink); }
 .card button, dialog button, section button, .file-btn {
-  background: #2c1d51;
+  background: #f6edd7;
   border: 1px solid var(--line);
   border-radius: 10px;
   padding: 8px 14px;
 }
-button.primary { background: var(--accent-deep); border-color: transparent; }
+button.primary { background: var(--accent-deep); border-color: transparent; color: #fffcf3; }
 button.danger { background: none; border-color: var(--danger); color: var(--danger); margin-right: auto; }
 button.big { width: 100%; padding: 14px; font-size: 1.05rem; margin-top: 4px; }
 
 .empty { color: var(--muted); text-align: center; padding: 36px 0; }
+.empty-art { display: block; width: 84px; margin: 0 auto 12px; }
 .hint { color: var(--muted); font-size: 0.85rem; }
 
 .stars { color: var(--gold); letter-spacing: 2px; }
@@ -124,7 +131,7 @@ dialog {
   width: min(92vw, 420px);
   padding: 20px;
 }
-dialog::backdrop { background: rgba(8, 4, 20, 0.7); }
+dialog::backdrop { background: rgba(74, 53, 18, 0.45); }
 dialog h2 { margin: 0 0 4px; font-size: 1.2rem; }
 
 dialog label, #settings-form label {
@@ -137,7 +144,7 @@ dialog input, dialog textarea, #settings-form input {
   display: block;
   width: 100%;
   margin-top: 4px;
-  background: #170f2c;
+  background: #fbf6e8;
   color: var(--ink);
   border: 1px solid var(--line);
   border-radius: 10px;
@@ -158,7 +165,7 @@ dialog input, dialog textarea, #settings-form input {
   opacity: 0;
   pointer-events: none;
 }
-.rating-row label { color: #4b3d78; cursor: pointer; margin: 0; }
+.rating-row label { color: #dcc9a0; cursor: pointer; margin: 0; }
 .rating-row input:checked ~ label { color: var(--gold); }
 
 .file-btn { display: inline-block; margin-left: 8px; }

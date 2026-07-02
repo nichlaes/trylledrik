@@ -1,12 +1,48 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-  <rect width="512" height="512" rx="110" fill="#150e26"/>
-  <rect x="218" y="72" width="76" height="34" rx="10" fill="#c4b5fd"/>
-  <rect x="226" y="96" width="60" height="72" rx="12" fill="#a78bfa"/>
-  <path d="M226 160 L226 202 C152 238 118 300 118 348 a138 138 0 0 0 276 0 C394 300 360 238 286 202 L286 160 Z" fill="#3b2a6e"/>
-  <path d="M137 322 a119 121 0 0 0 238 8 c0-34-24-64-64-82 -44 22-116 26-174 74z" fill="#34d399"/>
-  <circle cx="210" cy="362" r="14" fill="#a7f3d0"/>
-  <circle cx="272" cy="398" r="10" fill="#a7f3d0"/>
-  <circle cx="300" cy="342" r="8" fill="#a7f3d0"/>
-  <path d="M402 128 l8 22 22 8 -22 8 -8 22 -8 -22 -22 -8 22 -8 z" fill="#fbbf24"/>
-  <path d="M96 168 l6 16 16 6 -16 6 -6 16 -6 -16 -16 -6 16 -6 z" fill="#fbbf24"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 520">
+  <defs>
+    <linearGradient id="amber" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f2b64a"/>
+      <stop offset="1" stop-color="#d98e22"/>
+    </linearGradient>
+  </defs>
+  <!-- swing-top bail wire -->
+  <path d="M132 34 L114 36 C96 38 96 64 114 66 L126 68" fill="none" stroke="#b39a63" stroke-width="5" stroke-linecap="round"/>
+  <path d="M188 34 L206 36 C224 38 224 64 206 66 L194 68" fill="none" stroke="#b39a63" stroke-width="5" stroke-linecap="round"/>
+  <circle cx="114" cy="66" r="4.5" fill="#b39a63"/>
+  <circle cx="206" cy="66" r="4.5" fill="#b39a63"/>
+  <!-- cap -->
+  <rect x="130" y="12" width="60" height="34" rx="10" fill="#f7f1e3" stroke="#d9c8a3" stroke-width="2.5"/>
+  <!-- neck -->
+  <rect x="141" y="44" width="38" height="52" fill="#f5edd8" stroke="#dcc99c" stroke-width="2.5"/>
+  <!-- collar ring -->
+  <rect x="130" y="92" width="60" height="16" rx="8" fill="#efe3c4" stroke="#dcc99c" stroke-width="2.5"/>
+  <!-- glass body -->
+  <path d="M141 108 L141 134 C141 152 78 168 78 216 L78 428 C78 470 112 494 160 494 C208 494 242 470 242 428 L242 216 C242 168 179 152 179 134 L179 108 Z"
+        fill="#f8f1de" stroke="#dcc99c" stroke-width="3"/>
+  <!-- liquid -->
+  <path d="M86 222 L234 222 L234 426 C234 462 204 484 160 484 C116 484 86 462 86 426 Z" fill="url(#amber)"/>
+  <ellipse cx="160" cy="222" rx="74" ry="9" fill="#f6c76a"/>
+  <!-- bubbles in liquid -->
+  <circle cx="122" cy="418" r="5.5" fill="#f9d791" opacity="0.85"/>
+  <circle cx="196" cy="450" r="4.5" fill="#f9d791" opacity="0.85"/>
+  <circle cx="214" cy="392" r="3.5" fill="#f9d791" opacity="0.8"/>
+  <circle cx="104" cy="368" r="4" fill="#f9d791" opacity="0.8"/>
+  <circle cx="178" cy="244" r="3" fill="#f9d791" opacity="0.8"/>
+  <circle cx="130" cy="300" r="3" fill="#f9d791" opacity="0.7"/>
+  <!-- glass highlight -->
+  <rect x="94" y="146" width="15" height="310" rx="7.5" fill="#ffffff" opacity="0.35"/>
+  <!-- label -->
+  <rect x="114" y="258" width="92" height="132" rx="40" fill="#fdf8ec" stroke="#e8d7ae" stroke-width="2"/>
+  <rect x="122" y="266" width="76" height="116" rx="33" fill="none" stroke="#e0b25e" stroke-width="2"/>
+  <!-- label bubbles -->
+  <circle cx="160" cy="292" r="5" fill="none" stroke="#dd9b33" stroke-width="2.5"/>
+  <circle cx="149" cy="304" r="3.5" fill="none" stroke="#dd9b33" stroke-width="2.5"/>
+  <circle cx="168" cy="308" r="2.5" fill="none" stroke="#dd9b33" stroke-width="2.5"/>
+  <!-- leaf sprig -->
+  <path d="M160 372 C160 352 160 340 160 324" fill="none" stroke="#3e7d3a" stroke-width="4.5" stroke-linecap="round"/>
+  <path d="M160 340 C148 338 136 331 133 317 C147 317 158 326 160 340 Z" fill="#3e7d3a"/>
+  <path d="M160 340 C172 338 184 331 187 317 C173 317 162 326 160 340 Z" fill="#5a9b57"/>
+  <path d="M160 358 C150 356 141 350 138 339 C150 339 158 346 160 358 Z" fill="#5a9b57"/>
+  <path d="M160 358 C170 356 179 350 182 339 C170 339 162 346 160 358 Z" fill="#3e7d3a"/>
+  <path d="M160 324 C153 315 153 306 160 298 C167 306 167 315 160 324 Z" fill="#3e7d3a"/>
 </svg>
