@@ -54,6 +54,7 @@ export function deleteBatch(state, id) {
 
 const STAGES = ['f1', 'f2', 'done'];
 const ISO_DATE = /^\d{4}-\d{2}-\d{2}$/;
+const ID_FORMAT = /^[a-zA-Z0-9_-]{1,40}$/;
 
 export function validateImport(data) {
   if (!data || typeof data !== 'object' || Array.isArray(data)) return false;
@@ -69,11 +70,17 @@ export function validateImport(data) {
       b &&
       typeof b === 'object' &&
       typeof b.id === 'string' &&
+      ID_FORMAT.test(b.id) &&
       typeof b.name === 'string' &&
       STAGES.includes(b.stage) &&
       typeof b.f1Start === 'string' &&
       ISO_DATE.test(b.f1Start) &&
       Number.isInteger(b.f1Days) &&
-      b.f1Days >= 1
+      b.f1Days >= 1 &&
+      (b.stage === 'f1' ||
+        (typeof b.f2Start === 'string' &&
+          ISO_DATE.test(b.f2Start) &&
+          Number.isInteger(b.f2Days) &&
+          b.f2Days >= 1))
   );
 }

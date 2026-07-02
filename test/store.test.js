@@ -96,3 +96,43 @@ test('validateImport rejects junk', () => {
     batches: [{ id: 'a', name: 'x', stage: 'weird', f1Start: '2026-07-02', f1Days: 10 }],
   }));
 });
+
+test('validateImport rejects f2 batch with missing f2 fields', () => {
+  assert.ok(!validateImport({
+    batches: [{ id: 'a', name: 'x', stage: 'f2', f1Start: '2026-07-02', f1Days: 10 }],
+  }));
+  assert.ok(!validateImport({
+    batches: [{
+      id: 'a',
+      name: 'x',
+      stage: 'done',
+      f1Start: '2026-07-02',
+      f1Days: 10,
+      f2Start: null,
+      f2Days: 3,
+    }],
+  }));
+});
+
+test('validateImport accepts f2 batch with valid f2 fields', () => {
+  assert.ok(validateImport({
+    batches: [{
+      id: 'a',
+      name: 'x',
+      stage: 'f2',
+      f1Start: '2026-07-02',
+      f1Days: 10,
+      f2Start: '2026-07-12',
+      f2Days: 3,
+    }],
+  }));
+});
+
+test('validateImport rejects malicious or malformed ids', () => {
+  assert.ok(!validateImport({
+    batches: [{ id: '"><img src=x>', name: 'x', stage: 'f1', f1Start: '2026-07-02', f1Days: 10 }],
+  }));
+  assert.ok(!validateImport({
+    batches: [{ id: '', name: 'x', stage: 'f1', f1Start: '2026-07-02', f1Days: 10 }],
+  }));
+});
