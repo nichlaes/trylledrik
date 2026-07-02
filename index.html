@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Trylledrik</title>
+<meta name="description" content="Kombucha fermentation tracker">
+<meta name="theme-color" content="#150e26">
+<link rel="stylesheet" href="./style.css">
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="icon" href="./icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="./icon-180.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+</head>
+<body>
+<header>
+  <h1>&#x1F9EA; Trylledrik</h1>
+  <nav>
+    <button type="button" data-tab="brews" class="tab active">Brews</button>
+    <button type="button" data-tab="history" class="tab">History</button>
+    <button type="button" data-tab="settings" class="tab">Settings</button>
+  </nav>
+</header>
+<main>
+  <section id="tab-brews">
+    <div id="batch-list"></div>
+    <button type="button" id="new-batch" class="primary big">+ New batch</button>
+  </section>
+
+  <section id="tab-history" hidden>
+    <div id="history-list"></div>
+  </section>
+
+  <section id="tab-settings" hidden>
+    <form id="settings-form">
+      <label>Default F1 days
+        <input type="number" name="defaultF1Days" min="1" required>
+      </label>
+      <label>Default F2 days
+        <input type="number" name="defaultF2Days" min="1" required>
+      </label>
+      <label>Reminder time
+        <input type="time" name="reminderTime" required>
+      </label>
+      <button class="primary">Save settings</button>
+    </form>
+    <h2>Data</h2>
+    <button type="button" id="export-data">Export data (JSON)</button>
+    <label class="file-btn">Import data
+      <input type="file" id="import-data" accept="application/json,.json" hidden>
+    </label>
+    <p class="hint">Import replaces everything. Your current data is downloaded as a backup first.</p>
+  </section>
+</main>
+
+<dialog id="dlg-new">
+  <form method="dialog" id="form-new">
+    <h2>New batch</h2>
+    <label>Name
+      <input name="batchName" placeholder="Batch #&hellip;">
+    </label>
+    <label>F1 start
+      <input type="date" name="f1Start" required>
+    </label>
+    <label>F1 days
+      <input type="number" name="f1Days" min="1" required>
+    </label>
+    <menu>
+      <button value="cancel" formnovalidate>Cancel</button>
+      <button value="ok" class="primary">Start F1</button>
+    </menu>
+  </form>
+</dialog>
+
+<dialog id="dlg-bottle">
+  <form method="dialog" id="form-bottle">
+    <h2>Bottle it &#x1F37E;</h2>
+    <label>Flavorings
+      <input name="flavorings" placeholder="ginger, raspberry&hellip;">
+    </label>
+    <label>F2 start
+      <input type="date" name="f2Start" required>
+    </label>
+    <label>F2 days
+      <input type="number" name="f2Days" min="1" required>
+    </label>
+    <p class="hint">Bottling on another day than planned? Remove the old calendar event by hand &mdash; the app can't delete events.</p>
+    <menu>
+      <button value="cancel" formnovalidate>Cancel</button>
+      <button value="ok" class="primary">Start F2</button>
+    </menu>
+  </form>
+</dialog>
+
+<dialog id="dlg-finish">
+  <form method="dialog" id="form-finish">
+    <h2>Finish batch &#x2744;&#xFE0F;</h2>
+    <span class="hint">Rating</span>
+    <div class="rating-row">
+      <input type="radio" id="rate5" name="rating" value="5" required><label for="rate5">&#x2605;</label>
+      <input type="radio" id="rate4" name="rating" value="4"><label for="rate4">&#x2605;</label>
+      <input type="radio" id="rate3" name="rating" value="3"><label for="rate3">&#x2605;</label>
+      <input type="radio" id="rate2" name="rating" value="2"><label for="rate2">&#x2605;</label>
+      <input type="radio" id="rate1" name="rating" value="1"><label for="rate1">&#x2605;</label>
+    </div>
+    <label>Tasting notes
+      <textarea name="notes" rows="3" placeholder="How did it turn out?"></textarea>
+    </label>
+    <menu>
+      <button value="cancel" formnovalidate>Cancel</button>
+      <button value="ok" class="primary">To the fridge</button>
+    </menu>
+  </form>
+</dialog>
+
+<dialog id="dlg-edit">
+  <form method="dialog" id="form-edit">
+    <h2>Edit batch</h2>
+    <label>Name
+      <input name="batchName" required>
+    </label>
+    <label>F1 start
+      <input type="date" name="f1Start" required>
+    </label>
+    <label>F1 days
+      <input type="number" name="f1Days" min="1" required>
+    </label>
+    <div id="edit-f2-fields">
+      <label>F2 start
+        <input type="date" name="f2Start">
+      </label>
+      <label>F2 days
+        <input type="number" name="f2Days" min="1">
+      </label>
+    </div>
+    <menu>
+      <button value="delete" formnovalidate class="danger">Delete</button>
+      <button value="cancel" formnovalidate>Cancel</button>
+      <button value="ok" class="primary">Save</button>
+    </menu>
+  </form>
+</dialog>
+
+<script type="module" src="./app.js"></script>
+</body>
+</html>
