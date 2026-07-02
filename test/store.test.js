@@ -136,3 +136,61 @@ test('validateImport rejects malicious or malformed ids', () => {
     batches: [{ id: '', name: 'x', stage: 'f1', f1Start: '2026-07-02', f1Days: 10 }],
   }));
 });
+
+function doneBatch(overrides) {
+  return {
+    id: 'a',
+    name: 'x',
+    stage: 'done',
+    f1Start: '2026-07-02',
+    f1Days: 10,
+    f2Start: '2026-07-12',
+    f2Days: 3,
+    rating: 4,
+    finishedAt: '2026-07-15',
+    ...overrides,
+  };
+}
+
+test('validateImport rejects out-of-range ratings on a done batch', () => {
+  assert.ok(!validateImport({ batches: [doneBatch({ rating: 6 })] }));
+  assert.ok(!validateImport({ batches: [doneBatch({ rating: -1 })] }));
+});
+
+test('validateImport accepts null or in-range integer ratings', () => {
+  assert.ok(validateImport({ batches: [doneBatch({ rating: null })] }));
+  assert.ok(validateImport({ batches: [doneBatch({ rating: 4 })] }));
+});
+
+test('validateImport rejects an absurdly large f2Days on an f2 batch', () => {
+  assert.ok(!validateImport({
+    batches: [{
+      id: 'a',
+      name: 'x',
+      stage: 'f2',
+      f1Start: '2026-07-02',
+      f1Days: 10,
+      f2Start: '2026-07-12',
+      f2Days: 2000000000,
+    }],
+  }));
+});
+
+test('validateImport rejects an absurdly large f1Days', () => {
+  assert.ok(!validateImport({
+    batches: [{ id: 'a', name: 'x', stage: 'f1', f1Start: '2026-07-02', f1Days: 2000000000 }],
+  }));
+});
+
+test('validateImport rejects an invalid settings.reminderTime', () => {
+  assert.ok(!validateImport({ batches: [], settings: { reminderTime: 25 } }));
+  assert.ok(!validateImport({ batches: [], settings: { reminderTime: '99:99' } }));
+});
+
+test('validateImport accepts a valid settings.reminderTime', () => {
+  assert.ok(validateImport({ batches: [], settings: { reminderTime: '07:30' } }));
+});
+
+test('validateImport rejects a non-integer settings.batchCounter', () => {
+  assert.ok(!validateImport({ batches: [], settings: { batchCounter: '5' } }));
+});

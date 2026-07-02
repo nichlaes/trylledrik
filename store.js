@@ -55,6 +55,33 @@ export function deleteBatch(state, id) {
 const STAGES = ['f1', 'f2', 'done'];
 const ISO_DATE = /^\d{4}-\d{2}-\d{2}$/;
 const ID_FORMAT = /^[a-zA-Z0-9_-]{1,40}$/;
+const REMINDER_TIME = /^([01]\d|2[0-3]):[0-5]\d$/;
+const MAX_DAYS = 3650;
+
+function validSettings(s) {
+  if (
+    s.defaultF1Days !== undefined &&
+    !(Number.isInteger(s.defaultF1Days) && s.defaultF1Days >= 1 && s.defaultF1Days <= MAX_DAYS)
+  ) {
+    return false;
+  }
+  if (
+    s.defaultF2Days !== undefined &&
+    !(Number.isInteger(s.defaultF2Days) && s.defaultF2Days >= 1 && s.defaultF2Days <= MAX_DAYS)
+  ) {
+    return false;
+  }
+  if (
+    s.batchCounter !== undefined &&
+    !(Number.isInteger(s.batchCounter) && s.batchCounter >= 0 && s.batchCounter <= 1000000)
+  ) {
+    return false;
+  }
+  if (s.reminderTime !== undefined && !(typeof s.reminderTime === 'string' && REMINDER_TIME.test(s.reminderTime))) {
+    return false;
+  }
+  return true;
+}
 
 export function validateImport(data) {
   if (!data || typeof data !== 'object' || Array.isArray(data)) return false;
@@ -65,6 +92,7 @@ export function validateImport(data) {
   ) {
     return false;
   }
+  if (data.settings !== undefined && !validSettings(data.settings)) return false;
   return data.batches.every(
     (b) =>
       b &&
@@ -77,10 +105,20 @@ export function validateImport(data) {
       ISO_DATE.test(b.f1Start) &&
       Number.isInteger(b.f1Days) &&
       b.f1Days >= 1 &&
+      b.f1Days <= MAX_DAYS &&
       (b.stage === 'f1' ||
         (typeof b.f2Start === 'string' &&
           ISO_DATE.test(b.f2Start) &&
           Number.isInteger(b.f2Days) &&
-          b.f2Days >= 1))
+          b.f2Days >= 1 &&
+          b.f2Days <= MAX_DAYS)) &&
+      (b.rating === undefined ||
+        b.rating === null ||
+        (Number.isInteger(b.rating) && b.rating >= 1 && b.rating <= 5)) &&
+      (b.flavorings === undefined || typeof b.flavorings === 'string') &&
+      (b.notes === undefined || typeof b.notes === 'string') &&
+      (b.finishedAt === undefined ||
+        b.finishedAt === null ||
+        (typeof b.finishedAt === 'string' && ISO_DATE.test(b.finishedAt)))
   );
 }

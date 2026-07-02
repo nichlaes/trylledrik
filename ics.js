@@ -21,7 +21,7 @@ export function escapeText(s) {
     .replace(/\\/g, '\\\\')
     .replace(/;/g, '\\;')
     .replace(/,/g, '\\,')
-    .replace(/\r?\n/g, '\\n');
+    .replace(/\r\n|[\r\n]/g, '\\n');
 }
 
 // RFC 5545 §3.1: physical lines are at most 75 octets; continuations start

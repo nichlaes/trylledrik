@@ -1,5 +1,5 @@
 // Cache-first app shell. Bump CACHE on every deploy that changes assets.
-const CACHE = 'trylledrik-v2';
+const CACHE = 'trylledrik-v3';
 const ASSETS = [
   './',
   './index.html',

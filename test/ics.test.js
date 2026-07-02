@@ -42,6 +42,11 @@ test('escapeText leaves plain text alone', () => {
   assert.equal(escapeText('Batch #1'), 'Batch #1');
 });
 
+test('escapeText escapes a lone carriage return', () => {
+  assert.equal(escapeText('A\rB'), 'A\\nB');
+  assert.equal(escapeText('A\r\nB'), 'A\\nB');
+});
+
 test('foldLine leaves short lines alone', () => {
   assert.equal(foldLine('SUMMARY:short'), 'SUMMARY:short');
 });
