@@ -339,3 +339,6 @@ $('#import-data').addEventListener('change', async (e) => {
 
 // --- boot ---
 render();
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('./sw.js');
+}
