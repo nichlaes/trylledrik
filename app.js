@@ -6,6 +6,7 @@ import {
   finishBatch,
   updateBatch,
   deleteBatch,
+  validateImport,
 } from './store.js';
 
 const BATCHES_KEY = 'trylledrik.batches';
@@ -300,6 +301,40 @@ $('#dlg-edit').addEventListener('close', () => {
     fields.f2Days = Number(f.f2Days.value);
   }
   setState(updateBatch(state, actionBatchId, fields));
+});
+
+// --- backup / restore ---
+function exportState(prefix) {
+  downloadFile(
+    `${prefix}-${todayIso()}.json`,
+    JSON.stringify(state, null, 2),
+    'application/json'
+  );
+}
+
+$('#export-data').addEventListener('click', () => exportState('trylledrik-backup'));
+
+$('#import-data').addEventListener('change', async (e) => {
+  const file = e.target.files[0];
+  e.target.value = '';
+  if (!file) return;
+  let data;
+  try {
+    data = JSON.parse(await file.text());
+  } catch {
+    alert('That file is not valid JSON.');
+    return;
+  }
+  if (!validateImport(data)) {
+    alert('That file does not look like a trylledrik backup.');
+    return;
+  }
+  if (!confirm('Replace ALL current data with the imported file? Your current data is downloaded as a backup first.')) return;
+  exportState('trylledrik-pre-import');
+  setState({
+    batches: data.batches,
+    settings: { ...DEFAULT_SETTINGS, ...(data.settings || {}) },
+  });
 });
 
 // --- boot ---
