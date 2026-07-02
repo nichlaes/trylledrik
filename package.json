@@ -1,0 +1,10 @@
+{
+  "name": "trylledrik",
+  "version": "1.0.0",
+  "description": "Kombucha fermentation tracker with calendar reminders",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "test": "node --test test/"
+  }
+}
